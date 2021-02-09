@@ -118,9 +118,11 @@ public class ShipmentTypeController {
 	@GetMapping("/excel")
 	public ModelAndView showExcelExport() {
 		//fetch data(all rows) from database
+		List<ShipmentType> list=service.getAllShipmentTypes();
 		
 		//create ModelAndView object
 		ModelAndView m=new ModelAndView();
+		m.addObject("list", list);
 		m.setView(new ShipmentTypeExcelView());
 		
 		//return model and view
