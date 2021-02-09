@@ -17,22 +17,26 @@ public class ShipmentTypeExcelView extends AbstractXlsxView {
 			Map<String, Object> model, 
 			Workbook workbook, 
 			HttpServletRequest request,
-			HttpServletResponse response) 
-					throws Exception {
-		
-		//create sheet with a name
+			HttpServletResponse response
+			) 
+					throws Exception 
+	{
+		//Create sheet using workbook
 		Sheet sheet=workbook.createSheet("SHIPMENTS");
 		
-		//create row 
-		Row row=sheet.createRow(0);
-		
-		//create cell with data
-		row.createCell(0).setCellValue("SID");
-		row.createCell(1).setCellValue("MODE");
-		row.createCell(2).setCellValue("CODE");
-		row.createCell(3).setCellValue("ENABLED");
-		row.createCell(4).setCellValue("GRADE");
-		row.createCell(5).setCellValue("DESCRIPTION");
+		setHead(sheet);
 	}
-	
+
+	private void setHead(Sheet sheet) {
+		/* Not a predefined method
+		 * Method to create row heading in excel file */
+		Row row=sheet.createRow(0);
+		row.createCell(0).setCellValue("ID");
+		row.createCell(0).setCellValue("MODE");
+		row.createCell(0).setCellValue("CODE");
+		row.createCell(0).setCellValue("ENABLED");
+		row.createCell(0).setCellValue("GRADE");
+		row.createCell(0).setCellValue("DESCRIPTION");
+	}
+
 }

@@ -116,15 +116,14 @@ public class ShipmentTypeController {
 	
 	//8.Excel Export
 	@GetMapping("/excel")
-	public ModelAndView excelExport() {
+	public ModelAndView showExcelExport() {
+		//fetch data(all rows) from database
+		
 		//create ModelAndView object
 		ModelAndView m=new ModelAndView();
-		
-		//Set View(I) implementation class object
 		m.setView(new ShipmentTypeExcelView());
 		
-		//add data to ModelAndView
-		
+		//return model and view
 		return m;
 	}
 	
