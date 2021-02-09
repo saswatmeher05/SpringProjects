@@ -12,6 +12,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.web.servlet.view.document.AbstractXlsxView;
 
 import in.nareshit.somu.model.ShipmentType;
+import in.nareshit.somu.util.AppUtil;
 
 public class ShipmentTypeExcelView extends AbstractXlsxView {
 
@@ -25,7 +26,7 @@ public class ShipmentTypeExcelView extends AbstractXlsxView {
 					throws Exception 
 	{
 		//modify fileName using content-disposition
-		response.setHeader("Content-Disposition", "attachment;filename=SHIPMENTS.xlsx");
+		response.setHeader("Content-Disposition", "attachment;filename=SHIPMENTS-"+AppUtil.getCurrentDateAndTime()+".xlsx");
 		
 		//read data from ModelAndView Memory
 		@SuppressWarnings("unchecked")
