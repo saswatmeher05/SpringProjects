@@ -49,4 +49,10 @@ public class ShipmentTypeServiceImpl implements IShipmentTypeService{
 		
 	}
 	
+	@Override
+	public List<Object[]> getShipmentTypeModeCount() {
+		List<Object[]> list=repo.getShipmentTypeModeCount();
+		return list;
+	}
+	
 }

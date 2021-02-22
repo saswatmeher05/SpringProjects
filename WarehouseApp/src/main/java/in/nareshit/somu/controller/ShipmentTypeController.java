@@ -3,6 +3,8 @@ package in.nareshit.somu.controller;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.ServletContext;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import in.nareshit.somu.model.ShipmentType;
 import in.nareshit.somu.service.IShipmentTypeService;
+import in.nareshit.somu.util.ShipmentTypeUtil;
 import in.nareshit.somu.view.ShipmentTypeExcelOneView;
 import in.nareshit.somu.view.ShipmentTypeExcelView;
 import in.nareshit.somu.view.ShipmentTypePdfView;
@@ -24,7 +27,13 @@ import in.nareshit.somu.view.ShipmentTypePdfView;
 public class ShipmentTypeController {
 	
 	@Autowired
-	IShipmentTypeService service;
+	private IShipmentTypeService service;
+	
+	@Autowired
+	private ShipmentTypeUtil util;
+	
+	@Autowired
+	private ServletContext sc;
 	
 	//1.Show register page
 	@GetMapping("/register")
@@ -161,4 +170,20 @@ public class ShipmentTypeController {
 			return m;
 		}
 	
+	//11. Charts generation
+		@GetMapping("/charts")
+		public String showCharts() {
+		// call service for data
+		List<Object[]> list =
+		service.getShipmentTypeModeCount();
+		// dynamic path inside server(runtime location)
+		String path = sc.getRealPath("/"); //root location
+		System.out.println("Runtime location=>" + path);
+		// call util method for generation
+		util.generatePieChart(path, list);
+		
+		return "ShipmentTypeCharts.html";
+		}
+		
+		
 }
