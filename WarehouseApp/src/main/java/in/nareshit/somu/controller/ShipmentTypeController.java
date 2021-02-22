@@ -15,7 +15,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import in.nareshit.somu.model.ShipmentType;
 import in.nareshit.somu.service.IShipmentTypeService;
+import in.nareshit.somu.view.ShipmentTypeExcelOneView;
 import in.nareshit.somu.view.ShipmentTypeExcelView;
+import in.nareshit.somu.view.ShipmentTypePdfView;
 
 @Controller
 @RequestMapping("/st")
@@ -128,5 +130,35 @@ public class ShipmentTypeController {
 		//return model and view
 		return m;
 	}
+	
+	//9.Excel Export One View
+		@GetMapping("/excelone")
+		public ModelAndView showExcelOneExport(
+				@RequestParam("id")Integer sid
+				) {
+			//fetch data from database
+			Optional<ShipmentType> opt=service.getOneShipmentType(sid);
+			
+			//create ModelAndView object
+			ModelAndView m=new ModelAndView();
+			m.addObject("st", opt.get());
+			m.setView(new ShipmentTypeExcelOneView());
+			
+			//return model and view
+			return m;
+		}
+	
+	//10.pdf export
+		@GetMapping("/pdf")
+		public ModelAndView exportToPdf() {
+			//fetch data from database
+			List<ShipmentType> list=service.getAllShipmentTypes();
+			
+			//create ModelAndView
+			ModelAndView m=new ModelAndView();
+			m.addObject("list",list);
+			m.setView(new ShipmentTypePdfView());
+			return m;
+		}
 	
 }
