@@ -179,8 +179,10 @@ public class ShipmentTypeController {
 		// dynamic path inside server(runtime location)
 		String path = sc.getRealPath("/"); //root location
 		System.out.println("Runtime location=>" + path);
+		
 		// call util method for generation
 		util.generatePieChart(path, list);
+		util.generateBarChart(path, list);
 		
 		return "ShipmentTypeCharts.html";
 		}
